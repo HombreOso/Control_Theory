@@ -1,0 +1,1 @@
+make sure PDF and all other files are rendered correctly
