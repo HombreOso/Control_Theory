@@ -1,0 +1,47 @@
+# Modern Robotics, p. 328 (Eq. 9.6–9.8): physical meaning
+
+Context: Section 9.1 (Point-to-point trajectories), straight-line paths. We want a path X(s), s from 0 to 1, that takes the end-effector from the pose X_start to the pose X_end, both elements of SE(3). The page gives two ways to do this: a screw path (Eq. 9.6) and a decoupled path (Eq. 9.7–9.8).
+
+
+## 1. “log(X_start⁻¹ X_end) is the twist, expressed in {start}, that takes X_start to X_end in unit time”
+
+- X_start⁻¹ X_end is the relative displacement: where the goal is, as seen from the start frame. It answers “how must the tool move relative to itself to get there?”
+- The matrix logarithm turns that finite displacement into the constant twist (a screw: axis, pitch and magnitude) which, followed for exactly one unit of time, produces the displacement. Physically it is the constant body velocity [ω, v] that you would have to hold for 1 s.
+- “Expressed in {start}” means the twist's axis and velocity are described in the coordinates of the starting tool frame, not the fixed world frame {s}.
+
+## 2. Eq. (9.6): X(s) = X_start exp(log(X_start⁻¹ X_end) s)
+
+- s is the fraction of the motion completed. s = 0 gives X_start. s = 1 gives X_start · X_start⁻¹ X_end = X_end, because exp(log A) = A.
+- For 0 < s < 1 you follow the same constant twist for a fraction s of the time, so the screw axis never changes. This is the SE(3) analogue of a straight line: the “direction” in the space of poses is constant.
+- Why post-multiply: the twist lives in the {start} (body) frame, so the incremental motion is applied relative to the already-moved tool frame, i.e. on the right of X_start. If the twist were expressed in the fixed frame {s}, you would pre-multiply instead: X(s) = exp(log(X_end X_start⁻¹) s) X_start. Both give the same path.
+
+## 3. “The origin of the end-effector does not generally follow a straight line”
+
+- A screw motion is a rotation about an axis combined with translation along that axis. Whenever the rotation is non-zero, a point off the axis moves on a circle (or a helix if the pitch is non-zero), not a straight line.
+- So the orientation and position are coupled: the tool tip may swing out sideways in order to rotate while translating. This matters when the tool must stay on a line (welding, cutting, insertion) or avoid obstacles near the straight route.
+- Pure translation (no rotation) is the only case where the screw path is a straight line.
+
+## 4. Eqs. (9.7)–(9.8): the decoupled path
+
+
+```
+p(s) = p_start + s (p_end − p_start)
+R(s) = R_start exp( log(R_start^T R_end) s )
+```
+
+- Eq. 9.7: the origin moves along a straight line at constant speed. Position is treated as ordinary ℝ³ linear interpolation.
+- Eq. 9.8: the orientation is rotated about one fixed axis, by the fraction s of the total relative rotation. R_start^T R_end is the relative rotation in the start frame, and its log is the axis × angle that does it. This is the shortest (geodesic) rotation between the two orientations, and the axis stays constant in the body frame.
+- The two motions are independent: the tool rotates about its own origin while that origin slides along the line. This is what “decoupling the rotational motion from the translational motion” means.
+
+## 5. Worked example (planar, to see the difference)
+
+Start at the identity (origin at (0,0), angle 0). End: rotated 90° and moved to (1, 0).
+
+- Screw path: the displacement is a pure rotation of 90° about the point c = (0.5, 0.5). The origin travels on a circular arc of radius 0.707 from (0,0) to (1,0). At s = 0.5 it is at (0.5, −0.207), i.e. it bulges 0.207 below the straight line.
+- Decoupled path: at s = 0.5 the origin is at (0.5, 0) exactly on the line, with orientation 45°.
+
+## 6. When to use which
+
+- Screw path: elegant and smooth, one constant twist. The path does not depend on the choice of the world frame or of the body frame, and the motion can be commanded as a single constant velocity. Use it when the tool-tip path is not important.
+- Decoupled path: use it when the tool origin must follow a straight line in Cartesian space. The line depends on which point of the tool is chosen as the origin.
+- Both are only geometric paths. A time scaling s(t) must still be chosen to turn them into trajectories (Section 9.2). The logarithm is undefined or ambiguous for a relative rotation of exactly 180°.
