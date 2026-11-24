@@ -25,14 +25,12 @@
             "id": "71d3cb5bbdee7b53",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "daily_briefs/robotics_control/2026-09-22.md",
-                "mode": "source",
-                "source": false
+                "file": "boards/tn1235-overview-of-stlink-derivatives-stmicroelectronics.pdf"
               },
-              "icon": "lucide-file",
-              "title": "2026-09-22"
+              "icon": "lucide-file-text",
+              "title": "tn1235-overview-of-stlink-derivatives-stmicroelectronics"
             }
           },
           {
@@ -217,8 +215,25 @@
       "bases:Create new base": false
     }
   },
-  "active": "c70d210dd3d753fa",
+  "active": "71d3cb5bbdee7b53",
   "lastOpenFiles": [
+    "daily_briefs/robotics_control/2026-10-30.md",
+    "daily_briefs/general_control_systems/2026-10-30.md",
+    "daily_briefs/general_control_systems/2026-10-13.md",
+    "daily_briefs/building_services_control/2026-10-13.md",
+    "daily_briefs/building_services_control/2026-10-12.md",
+    "daily_briefs/building_services_control/2026-10-01.md",
+    "daily_briefs/building_services_control/Eridas interview.md",
+    "daily_briefs/general_control_systems/2026-09-30.md",
+    "daily_briefs/building_services_control/2026-09-30.md",
+    "daily_briefs/building_services_control/2026-09-29.md",
+    "daily_briefs/robotics_control/2026-09-29.md",
+    "daily_briefs/general_control_systems/2026-09-29.md",
+    "daily_briefs/general_control_systems/Msaad2026_Economic_MPC.pdf",
+    "daily_briefs/building_services_control/2026-09-28.md",
+    "papers/building_services_control/2609.26238_Deformable_Linear_Objects_MPPI_BiLSTM.pdf",
+    "daily_briefs/robotics_control/Ganai2026.md",
+    "daily_briefs/robotics_control/2026-09-22.md",
     "papers/2609.28082_Exact_Average_Consensus_Noisy_Links.pdf",
     "papers/building_services_control/2609.28082.pdf",
     "papers/2609.27010_Composite_Adaptive_Controllers_Euler-Lagrange.pdf",
@@ -227,9 +242,6 @@
     "papers/building_services_control/2609.26580___.pdf",
     "papers/building_services_control/2609.26580__.pdf",
     "papers/building_services_control/2609.26580_.pdf",
-    "papers/building_services_control/2609.26580 (1).pdf",
-    "papers/2609.26580_Wheel-loader_VCycle_Automation_Koopman_MPC.pdf",
-    "papers/building_services_control/2609.22703.pdf",
     "daily_briefs/robotics_control/2026-09-23.md",
     "daily_briefs/robotics_control/2026-09-24.md",
     "daily_briefs/industrial_control/2026-09-23.md",
@@ -238,22 +250,8 @@
     "daily_briefs/general_control_systems/2026-09-23.md",
     "daily_briefs/general_control_systems/2026-09-22.md",
     "boards/STM32F446RE Nucleo-64.md",
-    "daily_briefs/robotics_control/2026-09-22.md",
     "daily_briefs/industrial_control/2026-09-22.md",
     "daily_briefs/building_services_control/2026-09-22.md",
-    "daily_briefs/robotics_control/2026-09-21.md",
-    "daily_briefs/industrial_control/2026-09-21.md",
-    "daily_briefs/general_control_systems/state-machine-courses-website.md",
-    "daily_briefs/general_control_systems/2026-09-21.md",
-    "daily_briefs/building_services_control/2026-09-21.md",
-    "explanations/dual-variables.md",
-    "daily_briefs/robotics_control/2026-09-18.md",
-    "daily_briefs/robotics_control/2026-09-17.md",
-    "daily_briefs/robotics_control/2026-09-16.md",
-    "daily_briefs/robotics_control/2026-09-15.md",
-    "daily_briefs/industrial_control/2026-09-17.md",
-    "daily_briefs/industrial_control/2026-09-15.md",
-    "daily_briefs/general_control_systems/2026-09-18.md",
-    "daily_briefs/general_control_systems/2026-09-16.md"
+    "daily_briefs/robotics_control/2026-09-21.md"
   ]
 }

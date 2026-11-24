@@ -1,0 +1,1 @@
+https://www.type.ie/blog/the-mainframe-1-ai-and-climate
