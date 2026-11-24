@@ -1,0 +1,75 @@
+# What is SE(3)?
+
+SE(3) is the Special Euclidean group in three dimensions: the set of all rigid-body motions (rotation plus translation) of 3D space. Each element describes the position and orientation (the pose) of a rigid body relative to a reference frame. It is a 6-dimensional Lie group, so a pose has 6 degrees of freedom: 3 for rotation and 3 for translation.
+
+
+## 1. Definition
+
+SE(3) = { (R, p) | R ∈ SO(3), p ∈ ℝ³ }, where SO(3) = { R ∈ ℝ³ˣ³ | RᵀR = I, det R = +1 } is the group of 3D rotations.
+
+It is usually written as a 4×4 homogeneous transformation matrix:
+
+
+```
+T = [ R  p ]      R: 3x3 rotation matrix
+    [ 0  1 ]      p: 3x1 position vector (0 = 1x3 zero row)
+```
+
+A point x is transformed by x' = R x + p. In homogeneous coordinates this is the matrix product [x'; 1] = T [x; 1].
+
+
+## 2. Group properties
+
+- Closure / composition: T1 T2 is again in SE(3), with R = R1 R2 and p = R1 p2 + p1. This is the chaining of frames.
+- Identity: the 4×4 identity matrix I.
+- Inverse: T⁻¹ = [ Rᵀ  −Rᵀp ; 0  1 ]. It is cheap to compute, with no general matrix inversion needed.
+- Non-commutative: T1 T2 ≠ T2 T1 in general. The order of motions matters.
+- Dimension: 6. It is a smooth manifold, and topologically SE(3) ≅ SO(3) × ℝ³ (a semi-direct product, ℝ³ ⋊ SO(3)).
+- Distance-preserving: it preserves lengths, angles and orientation (no reflections).
+
+## 3. The Lie algebra se(3) and twists
+
+The Lie algebra se(3) is the tangent space at the identity. Its elements are twists, i.e. 6-vectors V = (ω, v), with angular velocity ω ∈ ℝ³ and linear velocity v ∈ ℝ³. As a 4×4 matrix:
+
+
+```
+[V] = [ [ω]×  v ]      [ω]× = skew-symmetric matrix of ω
+      [  0    0 ]
+```
+
+The matrix exponential maps twists to poses: T = exp([V]θ). This is the screw-motion view (Chasles' theorem): every rigid-body motion is a rotation about an axis combined with a translation along that axis. The matrix logarithm is the inverse map.
+
+
+## 4. Velocities and adjoint map
+
+- Body twist: [V_b] = T⁻¹ Ṫ.  Spatial twist: [V_s] = Ṫ T⁻¹.
+- The adjoint representation Ad_T = [ R 0 ; [p]×R R ] (6×6) changes the frame in which a twist (or wrench) is expressed: V_s = Ad_T V_b.
+- Forces and torques (wrenches) transform with the dual, Ad_Tᵀ.
+
+## 5. Why it matters in control theory and robotics
+
+- Forward kinematics: the end-effector pose of a robot arm is a product of exponentials, T(θ) = e^[S1]θ1 ⋯ e^[Sn]θn M (product of exponentials formula, as in Modern Robotics by Lynch and Park).
+- Rigid-body dynamics and control: the configuration space of a free rigid body (drone, spacecraft, mobile robot in 3D) is SE(3), so the state lives on a manifold, not in ℝ⁶. Controllers should be designed on it (geometric control) to avoid singularities of Euler angles.
+- State estimation and SLAM: poses are estimated on SE(3) with Lie-group methods (e.g. EKF on manifolds, pose-graph optimization).
+- Computer vision: camera extrinsics are an SE(3) element.
+
+## 6. Related groups
+
+- SO(3): rotations only (3 DoF), a subgroup of SE(3).
+- SE(2): planar rigid motions (3 DoF), with 3×3 homogeneous matrices.
+- SE(3) is a subgroup of the affine group and of the projective group. A closely related representation uses unit dual quaternions.
+
+## 7. Small example
+
+Rotate 90° about the z-axis, then translate by (1, 2, 3):
+
+
+```
+T = [ 0 -1  0  1 ]
+    [ 1  0  0  2 ]
+    [ 0  0  1  3 ]
+    [ 0  0  0  1 ]
+
+The point (1,0,0) maps to R(1,0,0) + p = (0,1,0) + (1,2,3) = (1,3,3).
+```
+

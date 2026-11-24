@@ -1,0 +1,1 @@
+Always save your answers in the folder Answers/ with the timestamp yyyy-MM-dd_hh-mm-ss and the topic in the file name. Save the answers in PDF, docx, txt, Markdown, and if necessary Excel
