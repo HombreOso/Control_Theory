@@ -1,6 +1,6 @@
 # Modern Robotics, p. 328 (Eq. 9.6–9.8): physical meaning
 
-Context: Section 9.1 (Point-to-point trajectories), straight-line paths. We want a path X(s), s from 0 to 1, that takes the end-effector from the pose X_start to the pose X_end, both elements of SE(3). The page gives two ways to do this: a screw path (Eq. 9.6) and a decoupled path (Eq. 9.7–9.8).
+Context: Section 9.2.1 (Straight-Line Paths, within 9.2 Point-to-Point Trajectories). We want a path X(s), s from 0 to 1, that takes the end-effector from the pose X_start to the pose X_end, both elements of SE(3). The page gives two ways to do this: a screw path (Eq. 9.6) and a decoupled path (Eq. 9.7–9.8).
 
 
 ## 1. “log(X_start⁻¹ X_end) is the twist, expressed in {start}, that takes X_start to X_end in unit time”
@@ -44,4 +44,4 @@ Start at the identity (origin at (0,0), angle 0). End: rotated 90° and moved to
 
 - Screw path: elegant and smooth, one constant twist. The path does not depend on the choice of the world frame or of the body frame, and the motion can be commanded as a single constant velocity. Use it when the tool-tip path is not important.
 - Decoupled path: use it when the tool origin must follow a straight line in Cartesian space. The line depends on which point of the tool is chosen as the origin.
-- Both are only geometric paths. A time scaling s(t) must still be chosen to turn them into trajectories (Section 9.2). The logarithm is undefined or ambiguous for a relative rotation of exactly 180°.
+- Both are only geometric paths. A time scaling s(t) must still be chosen to turn them into trajectories (Section 9.2.2). The logarithm is undefined or ambiguous for a relative rotation of exactly 180°.
